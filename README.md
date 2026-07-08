@@ -1,19 +1,18 @@
 # ML Pro – Health Prediction Suite
 
 ## Overview
-
 This repository contains a **Streamlit web application** that loads three pre‑trained scikit‑learn pipelines and provides an interactive UI for predicting:
-
 - **Diabetes** risk (🩸)
 - **Heart disease** risk (❤️)
 - **Parkinson's disease** progression (🧠)
 
-The models are stored as `.sav` files in the `models/` directory. The app dynamically builds the input form based on each model’s required features, shows a corresponding emoji header, and returns a friendly interpretation of the prediction.
+The models are stored as `.sav` files in the `models/` directory. The app dynamically builds the input form based on each model's required features, shows a corresponding emoji header, and returns a friendly interpretation of the prediction.
 
 ## Folder structure
 ```
 ML pro/
 ├── app.py                 # Streamlit application (single‑file implementation)
+├── requirements.txt        # Python dependencies
 ├── models/                # Saved pipelines (diabetes, heart disease, Parkinson's)
 │   ├── diabetes_pipeline.sav
 │   ├── heart_disease_pipeline.sav
@@ -23,30 +22,33 @@ ML pro/
 
 ## Prerequisites
 - **Windows** (the user environment)
-- **Python 3.9+**
+- **Python 3.9+**
 - Internet connection (only for the initial `pip install` step)
 
 ## Installation
 Open a terminal (PowerShell or Command Prompt) and run:
 ```powershell
 cd "C:\Users\omarh\Desktop\ML pro"
+
 # (optional) create a virtual environment
 python -m venv venv
 .\venv\Scripts\Activate.ps1   # PowerShell
 # or venv\Scripts\activate.bat for cmd.exe
+
 pip install --upgrade pip
-pip install streamlit joblib pandas scikit-learn
+pip install -r requirements.txt
 ```
+
+This installs all the dependencies listed in `requirements.txt` (Streamlit, pandas, scikit-learn, joblib, streamlit-option-menu) with pinned, tested versions — no need to install packages one by one.
 
 ## Running the app
 ```powershell
 streamlit run app.py
 ```
 A browser window will open at `http://localhost:8501`. You can then:
-1. Choose a model from the dropdown.
-2. Adjust the numeric inputs (plus/minus arrows step by 1).
-3. If the model includes a **Sex** feature, a radio button appears.
-4. Click **Predict** to see the result.
+1. Choose a model from the sidebar menu.
+2. Adjust the inputs using the sliders (or the Sex radio button, if applicable).
+3. Click **Predict** to see the result.
 
 ## Model feature details
 The script that inspects the pipelines discovered the following feature names:
@@ -57,8 +59,9 @@ The script that inspects the pipelines discovered the following feature names:
 These are automatically mapped to input fields by the app.
 
 ## Customisation
-- **Styling** – The app uses a dark‑mode glass‑morphism theme. Feel free to edit the CSS block in `app.py`.
+- **Styling** – The app uses a dark‑mode theme. Feel free to edit the CSS block in `app.py`.
 - **Additional models** – Drop a new `.sav` file into `models/` and add its feature list to the `MODEL_FEATURES` dictionary (or let the inspection script generate it).
+- **Dependencies** – If you add a new library to `app.py`, remember to add it to `requirements.txt` as well so the environment stays reproducible for anyone cloning the repo.
 
 ## License
 This project is provided under the MIT License. You are free to use, modify, and distribute it.
